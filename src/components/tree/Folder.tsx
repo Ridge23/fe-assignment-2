@@ -14,14 +14,17 @@ interface IFolder {
 
 export default function Folder({ name, childrenNodes, showDelete = true, onDelete }: IFolder): JSX.Element {
     const [showFolder, setShowFolder] = useState(false);
+    const noChildrenNodes = !childrenNodes || childrenNodes.length === 0
     const aClass = classNames([
-        { 'folder__link--active': childrenNodes && childrenNodes.length > 0 },
-        { 'folder__link--empty': !childrenNodes || childrenNodes.length === 0 },
+        { 'folder__link--active': !noChildrenNodes },
+        { 'folder__link--empty': noChildrenNodes },
     ])
+    const liClass = classNames('folder__li', {'folder__li--active': showFolder});
+    
     return (
         <>
-            <li key={`folder-${name}`} className="folder__li">
-                <a className={aClass} onClick={() => setShowFolder(!showFolder)}>{name}</a>
+            <li key={`folder-${name}`} className={liClass}>
+                <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
                 <div className="folder__actions">
                     {showDelete && <DeleteIcon onClick={onDelete} />}
                 </div>

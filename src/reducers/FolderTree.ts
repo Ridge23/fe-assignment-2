@@ -75,10 +75,9 @@ function FolderTree(state = initState, action) {
                 folders: state.folders.map((folder) => {
                     return {
                         ...folder,
-                        childrenNodes: folder.childrenNodes.filter(({ id, type }) => {
-                            if (id === action.id && type === 'file') return false;
-                            return true;
-                        })
+                        childrenNodes: folder.childrenNodes.filter(
+                            ({ id, type }) => !(id === action.id && type === 'file')
+                        )
                     }
                 }),
                 files: state.files.filter(({ id }) => id !== action.id)
@@ -89,7 +88,9 @@ function FolderTree(state = initState, action) {
             return {
                 ...state,
                 folders: state.folders.filter((folder) => folder.id !== action.id),
-                files: state.files.filter(({id}) => !currentFolder.childrenNodes.find((folderFile) => folderFile.id === id))
+                files: state.files.filter(({id}) => !currentFolder.childrenNodes.find(
+                    (folderFile) => folderFile.id === id)
+                )
             }
         }
         default: {

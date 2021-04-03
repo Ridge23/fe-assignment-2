@@ -10,11 +10,17 @@
       height: 20px;
       width: 20px;
       background-size: 16px;
-      background-image: url("../img/folder.svg");
+      background-image: url("../img/folder_closed.svg");
       background-repeat: no-repeat;
       margin-right: 10px;
       background-position: center center;
       vertical-align: middle;
+    }
+
+    &--active {
+      &::before {
+        background-image: url("../img/folder_opened.svg");
+      }
     }
 
     &:hover > .folder__actions {
