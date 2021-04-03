@@ -10,11 +10,13 @@ interface IFile {
 }
 
 interface IFolderTree {
+    selectedItem: { id: number; type: string };
     folders: IFolder[];
     files: IFile[];
 }
 
-const initState = {
+const initState: IFolderTree = {
+    selectedItem: { id: 0, type: 'folder' },
     folders: [
         {
             id: 0,
@@ -58,7 +60,17 @@ const initState = {
 }
 
 function FolderTree(state = initState, action) {
-    return state
+    switch (action.type) {
+        case 'SELECT_FOLDER': {
+            return {
+                ...state,
+                selectedItem: { id: action.id, type: action.type }
+            }
+        }
+        default: {
+            return state
+        }
+    }
 }
 
 export { IFolderTree, FolderTree as default };
