@@ -3,6 +3,8 @@ import React from 'react';
 import Folder from 'components/tree/Folder';
 import File from 'components/tree/File';
 
+import './sass/sidebar.scss';
+
 export default function SideBar(): JSX.Element {
     const childrenNodes3 = [
         <File name='child311' key="child311" />,
@@ -19,7 +21,7 @@ export default function SideBar(): JSX.Element {
     ];
 
     return <div className="sidebar">
-        <ul>
+        <ul className="sidebar__ul">
             <Folder name="root" childrenNodes={childrendNodes} />
         </ul>
     </div>;
