@@ -1,6 +1,8 @@
 .folder {
   list-style-type: none;
   &__li {
+    display: flex;
+    flex-direction: row;
     margin-top: 5px;
     &::before {
       content: "";
@@ -14,6 +16,10 @@
       background-position: center center;
       vertical-align: middle;
     }
+
+    &:hover > .folder__actions {
+      display: block;
+    }
   }
 
   &__link {
@@ -24,5 +30,9 @@
     &--empty {
       opacity: 0.5;
     }
+  }
+
+  &__actions {
+    display: none;
   }
 }

@@ -1,5 +1,6 @@
-import DeleteIcon from 'components/icons/DeleteIcon';
 import React from 'react';
+
+import DeleteIcon from 'components/icons/DeleteIcon';
 
 import './sass/file.scss';
 

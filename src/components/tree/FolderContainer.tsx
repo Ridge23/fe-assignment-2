@@ -20,5 +20,5 @@ export default function FolderContainer({id}) {
         })
     }
 
-    return <Folder name={folder.name} childrenNodes={childrenNodes} isSelected />;
+    return <Folder name={folder.name} childrenNodes={childrenNodes} showDelete={id !== 0} />;
 }
