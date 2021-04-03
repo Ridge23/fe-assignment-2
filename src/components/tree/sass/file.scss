@@ -16,18 +16,14 @@
     vertical-align: middle;
   }
 
-  &__delete {
+  &__actions {
     display: none;
-    background-image: url("../img/delete.svg");
-    width: 16px;
-    height: 16px;
-    float: right;
-    margin-left: 20px;
-    cursor: pointer;
   }
 
   &__title {
-    &:hover > .file__delete {
+    display: flex; 
+    flex-direction: row;
+    &:hover > .file__actions {
       display: block;
     }
   }
