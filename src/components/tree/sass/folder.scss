@@ -24,7 +24,7 @@
     }
 
     &:hover > .folder__actions {
-      display: block;
+      display: flex;
     }
   }
 
@@ -40,5 +40,6 @@
 
   &__actions {
     display: none;
+    flex-direction: row;
   }
 }

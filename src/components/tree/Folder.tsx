@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import classNames from 'classnames';
 
 import DeleteIcon from 'components/icons/DeleteIcon';
+import AddFolderIcon from 'components/icons/AddFolderIcon';
+import AddFileIcon from 'components/icons/AddFileIcon';
 
 import './sass/folder.scss'
+
 
 interface IFolder {
     name: string;
@@ -26,6 +29,8 @@ export default function Folder({ name, childrenNodes, showDelete = true, onDelet
             <li key={`folder-${name}`} className={liClass}>
                 <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
                 <div className="folder__actions">
+                    <AddFolderIcon onClick={()=>{}} />
+                    <AddFileIcon onClick={()=>{}} />
                     {showDelete && <DeleteIcon onClick={onDelete} />}
                 </div>
             </li>
