@@ -1,6 +1,6 @@
-import SideBar from 'components/sidebar/SideBar';
 import React from 'react';
 
+import SideBarContainer from 'components/sidebar/SideBarContainer';
 interface ILayout {
     title: string;
     children: JSX.Element | JSX.Element[] | string;
@@ -12,7 +12,7 @@ export default function Layout({ title, children }: ILayout): JSX.Element {
     return (
         <div className="layout">
             <div className="layout__sidebar">
-                <SideBar />
+                <SideBarContainer />
             </div>
             <div className="layout__content">
                 <div className="layout__content-header">
