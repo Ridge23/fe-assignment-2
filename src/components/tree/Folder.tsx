@@ -7,15 +7,15 @@ import AddFileIcon from 'components/icons/AddFileIcon';
 
 import './sass/folder.scss'
 
-
 interface IFolder {
     name: string;
     childrenNodes?: JSX.Element[];
     showDelete?: boolean;
     onDelete: () => void;
+    onFileCreate: () => void;
 }
 
-export default function Folder({ name, childrenNodes, showDelete = true, onDelete }: IFolder): JSX.Element {
+export default function Folder({ name, childrenNodes, showDelete = true, onDelete, onFileCreate }: IFolder): JSX.Element {
     const [showFolder, setShowFolder] = useState(false);
     const noChildrenNodes = !childrenNodes || childrenNodes.length === 0
     const aClass = classNames([
@@ -30,7 +30,7 @@ export default function Folder({ name, childrenNodes, showDelete = true, onDelet
                 <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
                 <div className="folder__actions">
                     <AddFolderIcon onClick={()=>{}} />
-                    <AddFileIcon onClick={()=>{}} />
+                    <AddFileIcon onClick={onFileCreate} />
                     {showDelete && <DeleteIcon onClick={onDelete} />}
                 </div>
             </li>
