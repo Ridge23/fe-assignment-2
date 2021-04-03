@@ -1,0 +1,18 @@
+.folder {
+    list-style-type: none;
+    &__li {
+        margin-top: 5px;
+        &::before {
+            content: '';   
+            display: inline-block;   
+            height: 20px;   
+            width: 20px;    
+            background-size: 16px;   
+            background-image: url('../img/folder.svg'); 
+            background-repeat: no-repeat;   
+            margin-right: 10px;
+            background-position: center center;
+            vertical-align: middle;
+        }
+    }
+}
