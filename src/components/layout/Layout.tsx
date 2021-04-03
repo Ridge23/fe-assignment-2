@@ -29,5 +29,5 @@ export default function Layout({ title, children }: ILayout): JSX.Element {
                 </div>
             </div>
         </div>
-    )
+    );
 }

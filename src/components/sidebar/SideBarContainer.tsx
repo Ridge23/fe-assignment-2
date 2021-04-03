@@ -4,8 +4,8 @@ import { IState } from 'reducers';
 
 import SideBar from './SideBar';
 
-export default function SideBarContainer() {
+export default function SideBarContainer(): JSX.Element {
     const rootFolder = useSelector((state: IState) => state.folderTree.folders[0]);
 
-    return <SideBar rootFolder={rootFolder} />
+    return <SideBar rootFolder={rootFolder} />;
 }

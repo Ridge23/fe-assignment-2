@@ -13,10 +13,10 @@ export default function FolderContainer({id}) {
     if (folder.childrenNodes && folder.childrenNodes.length > 0) {
         childrenNodes = folder.childrenNodes.map(({ id, type }) => {
             if (type === 'folder') {
-                return <FolderContainer id={id} key={`folder-${id}`} />
+                return <FolderContainer id={id} key={`folder-${id}`} />;
             }
 
-            return <FileContainer id={id} key={`file-${id}`} />
+            return <FileContainer id={id} key={`file-${id}`} />;
         })
     }
 

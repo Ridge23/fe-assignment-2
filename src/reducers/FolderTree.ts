@@ -1,3 +1,5 @@
+import { FILE_DELETE, SELECT_FOLDER } from 'actions/folderTree';
+
 interface IFolder {
     id: number;
     name: string;
@@ -61,14 +63,30 @@ const initState: IFolderTree = {
 
 function FolderTree(state = initState, action) {
     switch (action.type) {
-        case 'SELECT_FOLDER': {
+        case SELECT_FOLDER: {
             return {
                 ...state,
                 selectedItem: { id: action.id, type: action.type }
-            }
+            };
         }
+        case FILE_DELETE: {
+            return {
+                ...state,
+                folders: state.folders.map((folder) => {
+                    return {
+                        ...folder,
+                        childrenNodes: folder.childrenNodes.filter(({ id, type }) => {
+                            if (id === action.id && type === 'file') return false;
+                            return true;
+                        })
+                    }
+                }),
+                files: state.files.filter(({ id }) => id !== action.id)
+            };
+        }
+
         default: {
-            return state
+            return state;
         }
     }
 }
