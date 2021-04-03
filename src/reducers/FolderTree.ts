@@ -1,4 +1,4 @@
-import { FILE_DELETE, SELECT_FOLDER } from 'actions/folderTree';
+import { FILE_DELETE, FOLDER_DELETE, SELECT_FOLDER } from 'actions/folderTree';
 
 interface IFolder {
     id: number;
@@ -84,7 +84,14 @@ function FolderTree(state = initState, action) {
                 files: state.files.filter(({ id }) => id !== action.id)
             };
         }
-
+        case FOLDER_DELETE: {
+            const currentFolder = state.folders.find(({id}) => id === action.id);
+            return {
+                ...state,
+                folders: state.folders.filter((folder) => folder.id !== action.id),
+                files: state.files.filter(({id}) => !currentFolder.childrenNodes.find((folderFile) => folderFile.id === id))
+            }
+        }
         default: {
             return state;
         }

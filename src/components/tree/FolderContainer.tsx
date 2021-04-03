@@ -1,14 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { IState } from 'reducers';
+import { deleteFolderAction } from 'actions/folderTree';
 
 import Folder from './Folder';
 import FileContainer from './FileContainer';
 
 export default function FolderContainer({id}) {
+    const dispatch = useDispatch();
     const folder = useSelector((state: IState) => state.folderTree.folders.find(({id: folderId}) => folderId === id));
     let childrenNodes = [];
+    
+    if (!folder) {
+        return null;
+    }
     
     if (folder.childrenNodes && folder.childrenNodes.length > 0) {
         childrenNodes = folder.childrenNodes.map(({ id, type }) => {
@@ -20,5 +26,10 @@ export default function FolderContainer({id}) {
         })
     }
 
-    return <Folder name={folder.name} childrenNodes={childrenNodes} showDelete={id !== 0} />;
+    return <Folder 
+        name={folder.name} 
+        childrenNodes={childrenNodes} 
+        showDelete={id !== 0} 
+        onDelete={() => dispatch(deleteFolderAction(id))}
+    />;
 }

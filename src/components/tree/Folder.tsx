@@ -9,9 +9,10 @@ interface IFolder {
     name: string;
     childrenNodes?: JSX.Element[];
     showDelete?: boolean;
+    onDelete: () => void;
 }
 
-export default function Folder({ name, childrenNodes, showDelete = true }: IFolder): JSX.Element {
+export default function Folder({ name, childrenNodes, showDelete = true, onDelete }: IFolder): JSX.Element {
     const [showFolder, setShowFolder] = useState(false);
     const aClass = classNames([
         { 'folder__link--active': childrenNodes && childrenNodes.length > 0 },
@@ -22,7 +23,7 @@ export default function Folder({ name, childrenNodes, showDelete = true }: IFold
             <li key={`folder-${name}`} className="folder__li">
                 <a className={aClass} onClick={() => setShowFolder(!showFolder)}>{name}</a>
                 <div className="folder__actions">
-                    {showDelete && <DeleteIcon onClick={() => { }} />}
+                    {showDelete && <DeleteIcon onClick={onDelete} />}
                 </div>
             </li>
             {childrenNodes && showFolder &&
