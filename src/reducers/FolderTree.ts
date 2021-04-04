@@ -4,68 +4,39 @@ import {
     SELECT_FOLDER, 
     ADD_FILE, 
     ADD_FOLDER, 
-    RENAME 
+    RENAME,
+    FETCH_FOLDER_TREE_START,
+    FETCH_FOLDER_TREE_SUCCESS,
+    FETCH_FOLDER_TREE_ERROR
 } from 'actions/folderTree';
 
-interface IFolder {
+export interface IFolder {
     id: number;
     name: string;
     childrenNodes: { id: number; type: string }[];
 }
 
-interface IFile {
+export interface IFile {
     id: number;
     name: string;
 }
 
 interface IFolderTree {
-    selectedItem: { id: number; type: string };
     folders: IFolder[];
     files: IFile[];
+    isLoading: boolean;
 }
 
 const initState: IFolderTree = {
-    selectedItem: { id: 0, type: 'folder' },
+    isLoading: false,
     folders: [
         {
             id: 0,
             name: 'root',
-            childrenNodes: [{ id: 1, type: 'folder' }, { id: 1, type: 'file' }]
-        },
-        {
-            id: 1,
-            name: 'folder1',
-            childrenNodes: [{ id: 2, type: 'folder' }, { id: 3, type: 'folder' }]
-        },
-        {
-            id: 2,
-            name: 'folder2',
             childrenNodes: []
-        },
-        {
-            id: 3,
-            name: 'folder3',
-            childrenNodes: [{ id: 2, type: 'file' }, { id: 3, type: 'file' }, { id: 4, type: 'file' }]
-        },
+        }
     ],
-    files: [
-        {
-            id: 1,
-            name: 'file1'
-        },
-        {
-            id: 2,
-            name: 'file2'
-        },
-        {
-            id: 3,
-            name: 'file3'
-        },
-        {
-            id: 4,
-            name: 'file4'
-        },
-    ],
+    files: [],
 }
 
 function FolderTree(state = initState, action) {
@@ -158,6 +129,25 @@ function FolderTree(state = initState, action) {
                     }
                     return folder;
                 })
+            }
+        }
+        case FETCH_FOLDER_TREE_START: {
+            return {
+                ...state,
+                isLoading: true,
+            }
+        }
+        case FETCH_FOLDER_TREE_SUCCESS: {
+            return {
+                ...state,
+                folders: action.folders,
+                files: action.files,
+            }
+        }
+        case FETCH_FOLDER_TREE_ERROR: {
+            return {
+                ...state,
+                isLoading: false,
             }
         }
         default: {

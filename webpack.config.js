@@ -54,7 +54,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -65,6 +65,6 @@ module.exports = {
     ],
     devServer: {
         contentBase: './dist',
-        historyApiFallback: true
+        historyApiFallback: false
     },
 }
