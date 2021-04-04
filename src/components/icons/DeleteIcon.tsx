@@ -3,7 +3,7 @@ import React from 'react';
 import './sass/delete-icon.scss';
 
 interface IDeleteIcon {
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function DeleteIcon({ onClick }: IDeleteIcon): JSX.Element {

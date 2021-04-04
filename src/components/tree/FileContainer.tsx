@@ -10,5 +10,5 @@ export default function FileContainer({ id }): JSX.Element {
     const dispatch = useDispatch();
     const file = useSelector((state: IState) => state.folderTree.files.find(({ id: fileId }) => fileId === id));
     
-    return file ? <File name={file.name} onDelete={() => dispatch(deleteFileAction(id))} /> : null;
+    return file ? <File id={id} name={file.name} onDelete={() => dispatch(deleteFileAction(id))} /> : null;
 }
