@@ -31,10 +31,11 @@ export default function Folder({ id, name, childrenNodes, showDelete = true, onD
                 </ContextMenuTrigger>
                 <FolderContextMenu 
                     id={id} 
-                    showDelete={showDelete} 
+                    showDelete={showDelete}
                     onAddFileClick={onFileCreate}
                     onAddFolderClick={() => {}}
                     onDeleteClick={onDelete}
+                    onRenameClick={() => {}}
                 />
             </li>
             {childrenNodes && showFolder &&

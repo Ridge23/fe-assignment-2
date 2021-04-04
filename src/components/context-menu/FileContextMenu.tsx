@@ -2,8 +2,8 @@ import React from 'react';
 import { MenuItem } from "react-contextmenu";
 
 import DeleteIcon from 'components/icons/DeleteIcon';
+import RenameIcon from 'components/icons/RenameIcon';
 import ContextMenu from './ContextMenu';
-
 interface IFileContextMenu {
     id: number;
     onRenameClick: () => void;
@@ -14,7 +14,7 @@ export default function FileContextMenu({ id, onRenameClick, onDeleteClick }: IF
     return (
         <ContextMenu id={`file_menu_${id}`} >
             <MenuItem onClick={onRenameClick}>
-                Rename
+                <RenameIcon /> Rename
             </MenuItem>
             <MenuItem onClick={onDeleteClick}>
                 <DeleteIcon /> Delete
