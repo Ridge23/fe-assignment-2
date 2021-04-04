@@ -39,44 +39,50 @@ export default function FolderContainer({ id }: IFolderContainer) {
     let childrenFolders = folders.filter(({id}) => childrenFoldersIds.includes(id));
     let childrenFiles = files.filter(({id}) => childrenFilesIds.includes(id));
 
+    const onFileCreate = () => {
+        const fileName = prompt('Provide name of the file');
+        if (!fileName) {
+            return;
+        }
+        if (childrenFiles.find((file) => file.name === fileName)) {
+            alert('File already exists');
+            return;
+        }
+        dispatch(addFile(fileName, id));
+    };
+
+    const onFolderCreate = () => {
+        const folderName = prompt('Provide name of the folder');
+        if (!folderName) {
+            return;
+        }
+        if (childrenFolders.find((folder) => folder.name === folderName)) {
+            alert('Folder already exists');
+            return;
+        }
+        dispatch(addFolder(folderName, id));
+    };
+
+    const onRename = () => {
+        const folderName = prompt('New folder name', folder.name);
+        if (!folderName) {
+            return;
+        }
+        if (childrenFolders.find((folder) => folder.name === folderName)) {
+            alert('Folder already exists');
+            return;
+        }
+        dispatch(renameFolder(id, folderName));
+    };
+
     return <Folder
         id={folder.id}
         name={folder.name}
         childrenNodes={childrenNodes}
         showDelete={id !== 0}
         onDelete={() => dispatch(deleteFolder(id))}
-        onFileCreate={() => {
-            const fileName = prompt('Provide name of the file');
-            if (!fileName) {
-                return;
-            }
-            if (childrenFiles.find((file) => file.name === fileName)) {
-                alert('File already exists');
-                return;
-            }
-            dispatch(addFile(fileName, id));
-        }}
-        onFolderCreate={() => {
-            const folderName = prompt('Provide name of the folder');
-            if (!folderName) {
-                return;
-            }
-            if (childrenFolders.find((folder) => folder.name === folderName)) {
-                alert('Folder already exists');
-                return;
-            }
-            dispatch(addFolder(folderName, id));
-        }}
-        onRename={() => {
-            const folderName = prompt('New folder name', folder.name);
-            if (!folderName) {
-                return;
-            }
-            if (childrenFolders.find((folder) => folder.name === folderName)) {
-                alert('Folder already exists');
-                return;
-            }
-            dispatch(renameFolder(id, folderName));
-        }}
+        onFileCreate={onFileCreate}
+        onFolderCreate={onFolderCreate}
+        onRename={onRename}
     />;
 }
