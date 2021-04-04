@@ -12,10 +12,17 @@ describe('File', () => {
         const component = shallow(<File id={10} name='test.js' onDelete={noop} onRename={noop} />);
         const title = component.find('.file__title');
 
+        const contextMenuTrigger = component.find(ContextMenuTrigger);
+        expect(contextMenuTrigger).toHaveLength(1);
+        expect(component.find(ContextMenuTrigger).props()).toHaveProperty('id', 'file_menu_10');
+
+        const contextMenu = component.find(FileContextMenu);
+        expect(contextMenu).toHaveLength(1);
+        expect(component.find(FileContextMenu).props()).toHaveProperty('id', 10);
+        
         expect(component.find('li')).toHaveLength(1);
-        expect(component.find(ContextMenuTrigger)).toHaveLength(1);
-        expect(component.find(FileContextMenu)).toHaveLength(1);
         expect(component.find('li')).toHaveProperty('key');
+        
         expect(title.text()).toEqual('test.js');
         expect(component).toMatchSnapshot();
     });
