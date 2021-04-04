@@ -38,6 +38,9 @@ export default function FolderContainer({ id }: IFolderContainer) {
         onDelete={() => dispatch(deleteFolder(id))}
         onFileCreate={() => {
             const fileName = prompt('Provide name of the file');
+            if (!fileName) {
+                return;
+            }
             dispatch(addFile(fileName, id));
         }}
         onFolderCreate={() => {

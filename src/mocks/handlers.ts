@@ -73,15 +73,17 @@ export const handlers = [
         );
     }),
     rest.post('http://mock.local/tree/files', (req, res, ctx) => {
+        const { fileName } = req.body as any;
         return res(
             ctx.status(200),
-            ctx.json({ id: generateRandomId(), name: req.body.fileName })
+            ctx.json({ id: generateRandomId(), name: fileName })
         )
     }),
     rest.post('http://mock.local/tree/folders', (req, res, ctx) => {
+        const { folderName } = req.body as any;
         return res(
             ctx.status(200),
-            ctx.json({ id: generateRandomId(), name: req.body.folderName })
+            ctx.json({ id: generateRandomId(), name: folderName })
         )
     }),
 ];
