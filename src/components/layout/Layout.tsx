@@ -16,16 +16,12 @@ export default function Layout({ title, children }: ILayout): JSX.Element {
             </div>
             <div className="layout__content">
                 <div className="layout__content-header">
-                    
                 </div>
                 <div className="layout__content-container">
-                    <>
-                        <h1 className="layout__content-title">{title}</h1>
-                        <div className="layout-content-container">{children}</div>
-                    </>
+                    <h1 className="layout__content-title">{title}</h1>
+                    <div className="layout-content-container">{children}</div>
                 </div>
                 <div className="layout__content-footer">
-                    
                 </div>
             </div>
         </div>

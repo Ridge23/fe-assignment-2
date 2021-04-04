@@ -6,7 +6,11 @@ import { deleteFileAction, renameAction } from 'actions/folderTree';
 
 import File from './File';
 
-export default function FileContainer({ id }): JSX.Element {
+interface IFileContainer {
+    id: number;
+}
+
+export default function FileContainer({ id }: IFileContainer): JSX.Element {
     const dispatch = useDispatch();
     const file = useSelector((state: IState) => state.folderTree.files.find(({ id: fileId }) => fileId === id));
     

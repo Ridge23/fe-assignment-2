@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import classNames from 'classnames';
 import { ContextMenuTrigger } from "react-contextmenu";
 
-import './sass/folder.scss'
 import FolderContextMenu from 'components/context-menu/FolderContextMenu';
 
+import './sass/folder.scss'
 interface IFolder {
     id: number;
     name: string;

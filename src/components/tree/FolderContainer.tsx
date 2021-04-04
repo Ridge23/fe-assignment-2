@@ -8,7 +8,11 @@ import generateRandomId from 'helpers/generateId';
 import Folder from './Folder';
 import FileContainer from './FileContainer';
 
-export default function FolderContainer({ id }) {
+interface IFolderContainer {
+    id: number;
+}
+
+export default function FolderContainer({ id }: IFolderContainer) {
     const dispatch = useDispatch();
     const folder = useSelector((state: IState) => state.folderTree.folders.find(({ id: folderId }) => folderId === id));
     let childrenNodes = [];

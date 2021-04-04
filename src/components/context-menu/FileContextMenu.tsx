@@ -10,7 +10,8 @@ interface IFileContextMenu {
     onDeleteClick: () => void;
 }
 
-export default function FileContextMenu({ id, onRenameClick, onDeleteClick }: IFileContextMenu): JSX.Element {
+export default function FileContextMenu(props: IFileContextMenu): JSX.Element {
+    const { id, onRenameClick, onDeleteClick } = props;
     return (
         <ContextMenu id={`file_menu_${id}`} >
             <MenuItem onClick={onRenameClick}>
