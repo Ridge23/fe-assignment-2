@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SideBarContainer from 'components/sidebar/SideBarContainer';
+
 interface ILayout {
     title: string;
     children: JSX.Element | JSX.Element[] | string;
