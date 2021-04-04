@@ -23,17 +23,7 @@ const responseMock = {
             id: 1,
             name: 'folder1',
             childrenNodes: [{ id: 2, type: 'folder' }, { id: 3, type: 'folder' }]
-        },
-        {
-            id: 2,
-            name: 'folder2',
-            childrenNodes: []
-        },
-        {
-            id: 3,
-            name: 'folder3',
-            childrenNodes: [{ id: 2, type: 'file' }, { id: 3, type: 'file' }, { id: 4, type: 'file' }]
-        },
+        }
     ],
     files: [
         {
@@ -43,15 +33,32 @@ const responseMock = {
         {
             id: 2,
             name: 'file2.js'
+        }
+    ],
+};
+
+const responseAfterRenameMock = {
+    folders: [
+        {
+            id: 0,
+            name: 'root',
+            childrenNodes: [{ id: 1, type: 'folder' }, { id: 1, type: 'file' }]
         },
         {
-            id: 3,
-            name: 'file3.js'
+            id: 1,
+            name: 'folder-test',
+            childrenNodes: [{ id: 2, type: 'folder' }, { id: 3, type: 'folder' }]
+        }
+    ],
+    files: [
+        {
+            id: 1,
+            name: 'filetest.js'
         },
         {
-            id: 4,
-            name: 'file4.js'
-        },
+            id: 2,
+            name: 'file2.js'
+        }
     ],
 };
 
@@ -80,6 +87,36 @@ describe('folder tree reducer', () => {
             {
                 ...initState,
                 folders: responseMock.folders,
+                files: responseMock.files,
+                isLoading: false
+            }
+        )
+    });
+
+    it('should handle RENAME', () => {
+        expect(
+            reducer(
+                { ...initState, folders: responseMock.folders, files: responseMock.files },
+                { type: 'RENAME', entityType: 'file', id: 1, name: 'filetest.js' }
+            )
+        ).toEqual(
+            {
+                ...initState,
+                folders: responseMock.folders,
+                files: responseAfterRenameMock.files,
+                isLoading: false
+            }
+        )
+
+        expect(
+            reducer(
+                { ...initState, folders: responseMock.folders, files: responseMock.files },
+                { type: 'RENAME', entityType: 'folder', id: 1, name: 'folder-test' }
+            )
+        ).toEqual(
+            {
+                ...initState,
+                folders: responseAfterRenameMock.folders,
                 files: responseMock.files,
                 isLoading: false
             }
