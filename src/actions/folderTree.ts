@@ -161,11 +161,41 @@ export function addFolder(folderName, folderId) {
     }
 }
 
-export function renameAction(id, type, name) {
+function renameAction(id, type, name) {
     return {
         type: RENAME,
         entityType: type,
         id,
         name
+    }
+}
+
+export function renameFile(id, name) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(`http://mock.local/tree/files/${id}`, { method: 'PATCH' })
+            .then((response) => response.json())
+            .then(() => {
+                dispatch(renameAction(id, 'file', name));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
+    }
+}
+
+export function renameFolder(id, name) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(`http://mock.local/tree/folders/${id}`, { method: 'PATCH' })
+            .then((response) => response.json())
+            .then(() => {
+                dispatch(renameAction(id, 'folder', name));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
     }
 }

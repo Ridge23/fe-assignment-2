@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { IState } from 'reducers';
-import { addFile, addFolder, deleteFolder, renameAction } from 'actions/folderTree';
+import { addFile, addFolder, deleteFolder, renameFolder } from 'actions/folderTree';
 
 import Folder from './Folder';
 import FileContainer from './FileContainer';
@@ -52,7 +52,7 @@ export default function FolderContainer({ id }: IFolderContainer) {
             if (!folderName) {
                 return;
             }
-            dispatch(renameAction(id, 'folder', folderName));
+            dispatch(renameFolder(id, folderName));
         }}
     />;
 }

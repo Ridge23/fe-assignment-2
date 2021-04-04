@@ -60,6 +60,18 @@ export const handlers = [
             ctx.json({ success: true })
         );
     }),
+    rest.patch('http://mock.local/tree/files/:fileId', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ success: true })
+        );
+    }),
+    rest.patch('http://mock.local/tree/folders/:folderId', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ success: true })
+        );
+    }),
     rest.post('http://mock.local/tree/files', (req, res, ctx) => {
         return res(
             ctx.status(200),
