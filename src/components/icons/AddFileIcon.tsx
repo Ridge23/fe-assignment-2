@@ -3,7 +3,7 @@ import React from 'react';
 import './sass/add-file-icon.scss';
 
 interface IAddFileIcon {
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function AddFileIcon({ onClick }: IAddFileIcon): JSX.Element {

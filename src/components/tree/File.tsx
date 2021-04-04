@@ -2,7 +2,6 @@ import React from 'react';
 import { ContextMenuTrigger } from "react-contextmenu";
 
 import FileContextMenu from 'components/context-menu/FileContextMenu';
-import DeleteIcon from 'components/icons/DeleteIcon';
 
 import './sass/file.scss';
 

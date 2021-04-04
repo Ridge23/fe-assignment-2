@@ -3,7 +3,7 @@ import React from 'react';
 import './sass/add-folder-icon.scss';
 
 interface IAddFolderIcon {
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function AddFolderIcon({ onClick }: IAddFolderIcon): JSX.Element {

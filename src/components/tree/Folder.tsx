@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import classNames from 'classnames';
-
-import DeleteIcon from 'components/icons/DeleteIcon';
-import AddFolderIcon from 'components/icons/AddFolderIcon';
-import AddFileIcon from 'components/icons/AddFileIcon';
+import { ContextMenuTrigger } from "react-contextmenu";
 
 import './sass/folder.scss'
+import FolderContextMenu from 'components/context-menu/FolderContextMenu';
 
 interface IFolder {
+    id: number;
     name: string;
     childrenNodes?: JSX.Element[];
     showDelete?: boolean;
@@ -15,24 +14,28 @@ interface IFolder {
     onFileCreate: () => void;
 }
 
-export default function Folder({ name, childrenNodes, showDelete = true, onDelete, onFileCreate }: IFolder): JSX.Element {
+export default function Folder({ id, name, childrenNodes, showDelete = true, onDelete, onFileCreate }: IFolder): JSX.Element {
     const [showFolder, setShowFolder] = useState(false);
     const noChildrenNodes = !childrenNodes || childrenNodes.length === 0
     const aClass = classNames([
         { 'folder__link--active': !noChildrenNodes },
         { 'folder__link--empty': noChildrenNodes },
     ])
-    const liClass = classNames('folder__li', {'folder__li--active': showFolder});
-    
+    const liClass = classNames('folder__li', { 'folder__li--active': showFolder });
+
     return (
         <>
             <li key={`folder-${name}`} className={liClass}>
-                <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
-                <div className="folder__actions">
-                    <AddFolderIcon onClick={()=>{}} />
-                    <AddFileIcon onClick={onFileCreate} />
-                    {showDelete && <DeleteIcon onClick={onDelete} />}
-                </div>
+                <ContextMenuTrigger id={`folder_menu_${id}`}>
+                    <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
+                </ContextMenuTrigger>
+                <FolderContextMenu 
+                    id={id} 
+                    showDelete={showDelete} 
+                    onAddFileClick={onFileCreate}
+                    onAddFolderClick={() => {}}
+                    onDeleteClick={onDelete}
+                />
             </li>
             {childrenNodes && showFolder &&
                 <ul className="folder" key={`folder-children-${name}`}>
