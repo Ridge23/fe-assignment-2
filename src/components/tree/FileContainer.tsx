@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { IState } from 'reducers';
-import { deleteFileAction, renameAction } from 'actions/folderTree';
+import { deleteFile, renameAction } from 'actions/folderTree';
 
 import File from './File';
 
@@ -18,7 +18,7 @@ export default function FileContainer({ id }: IFileContainer): JSX.Element {
     ? <File 
         id={id} 
         name={file.name} 
-        onDelete={() => dispatch(deleteFileAction(id))} 
+        onDelete={() => dispatch(deleteFile(id))} 
         onRename={() => {
             const fileName = prompt('New file name', file.name);
             if (!fileName) {

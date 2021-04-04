@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { IState } from 'reducers';
-import { addFileAction, addFolderAction, deleteFolderAction, renameAction } from 'actions/folderTree';
+import { addFileAction, addFolderAction, deleteFolder, renameAction } from 'actions/folderTree';
 import generateRandomId from 'helpers/generateId';
 
 import Folder from './Folder';
@@ -36,7 +36,7 @@ export default function FolderContainer({ id }: IFolderContainer) {
         name={folder.name}
         childrenNodes={childrenNodes}
         showDelete={id !== 0}
-        onDelete={() => dispatch(deleteFolderAction(id))}
+        onDelete={() => dispatch(deleteFolder(id))}
         onFileCreate={() => {
             const fileName = prompt('Provide name of the file');
             const fileId = generateRandomId();

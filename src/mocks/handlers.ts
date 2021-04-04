@@ -48,4 +48,16 @@ export const handlers = [
             }),
         )
     }),
+    rest.delete('http://mock.local/tree/files/:fileId', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ success: true })
+        );
+    }),
+    rest.delete('http://mock.local/tree/folders/:folderId', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ success: true })
+        );
+    }),
 ];

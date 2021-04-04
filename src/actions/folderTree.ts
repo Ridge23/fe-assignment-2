@@ -51,18 +51,48 @@ export function fetchFolderTree() {
     }
 }
 
-export function deleteFileAction(id) {
+function deleteFileAction(id) {
     return {
         type: FILE_DELETE,
         id
     };
 }
 
-export function deleteFolderAction(id) {
+export function deleteFile(id) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(`http://mock.local/tree/files/${id}`, { method: 'DELETE' })
+            .then((response) => response.json())
+            .then(() => {
+                dispatch(deleteFileAction(id));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
+    }
+}
+
+function deleteFolderAction(id) {
     return {
         type: FOLDER_DELETE,
         id
     };
+}
+
+export function deleteFolder(id) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(`http://mock.local/tree/folders/${id}`, { method: 'DELETE' })
+            .then((response) => response.json())
+            .then(() => {
+                dispatch(deleteFolderAction(id));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
+    }
 }
 
 export function addFileAction(id, fileName, folderId) {
