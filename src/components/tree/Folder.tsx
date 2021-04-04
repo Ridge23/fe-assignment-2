@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classNames from 'classnames';
 import { ContextMenuTrigger } from "react-contextmenu";
 
@@ -14,6 +14,8 @@ interface IFolder {
     onFileCreate: () => void;
     onFolderCreate: () => void;
     onRename: () => void;
+    showFolder?: boolean;
+    toggleShowFolder: () => void;
 }
 
 export default function Folder(props: IFolder): JSX.Element {
@@ -25,9 +27,11 @@ export default function Folder(props: IFolder): JSX.Element {
         onDelete, 
         onFileCreate, 
         onFolderCreate, 
-        onRename 
+        onRename ,
+        showFolder,
+        toggleShowFolder
     } = props;
-    const [showFolder, setShowFolder] = useState(false);
+    
     const noChildrenNodes = !childrenNodes || childrenNodes.length === 0
     const aClass = classNames([
         { 'folder__link--active': !noChildrenNodes },
@@ -39,7 +43,7 @@ export default function Folder(props: IFolder): JSX.Element {
         <>
             <li key={`folder-${name}`} className={liClass}>
                 <ContextMenuTrigger id={`folder_menu_${id}`}>
-                    <a className={aClass} onClick={() => !noChildrenNodes && setShowFolder(!showFolder)}>{name}</a>
+                    <a className={aClass} onClick={() => !noChildrenNodes && toggleShowFolder()}>{name}</a>
                 </ContextMenuTrigger>
                 <FolderContextMenu 
                     id={id} 

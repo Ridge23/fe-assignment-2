@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { IState } from 'reducers';
@@ -16,6 +16,8 @@ export default function FolderContainer({ id }: IFolderContainer) {
     const folder = useSelector((state: IState) => state.folderTree.folders.find(({ id: folderId }) => folderId === id));
     const folders = useSelector((state: IState) => state.folderTree.folders);
     const files = useSelector((state: IState) => state.folderTree.files);
+
+    const [showFolder, setShowFolder] = useState(false);
 
     if (!folder) {
         return null;
@@ -36,8 +38,8 @@ export default function FolderContainer({ id }: IFolderContainer) {
         })
     }
 
-    let childrenFolders = folders.filter(({id}) => childrenFoldersIds.includes(id));
-    let childrenFiles = files.filter(({id}) => childrenFilesIds.includes(id));
+    let childrenFolders = folders.filter(({ id }) => childrenFoldersIds.includes(id));
+    let childrenFiles = files.filter(({ id }) => childrenFilesIds.includes(id));
 
     const onFileCreate = () => {
         const fileName = prompt('Provide name of the file');
@@ -49,6 +51,7 @@ export default function FolderContainer({ id }: IFolderContainer) {
             return;
         }
         dispatch(addFile(fileName, id));
+        setShowFolder(true);
     };
 
     const onFolderCreate = () => {
@@ -61,6 +64,7 @@ export default function FolderContainer({ id }: IFolderContainer) {
             return;
         }
         dispatch(addFolder(folderName, id));
+        setShowFolder(true);
     };
 
     const onRename = () => {
@@ -84,5 +88,7 @@ export default function FolderContainer({ id }: IFolderContainer) {
         onFileCreate={onFileCreate}
         onFolderCreate={onFolderCreate}
         onRename={onRename}
+        showFolder={showFolder}
+        toggleShowFolder={() => setShowFolder(!showFolder)}
     />;
 }
