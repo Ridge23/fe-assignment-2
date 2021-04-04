@@ -147,7 +147,18 @@ function FolderTree(state = initState, action) {
                 }
             }
 
-            return state;
+            return {
+                ...state,
+                folders: state.folders.map((folder: IFolder): IFolder => {
+                    if (folder.id === action.id) {
+                        return {
+                            ...folder,
+                            name: action.name
+                        }
+                    }
+                    return folder;
+                })
+            }
         }
         default: {
             return state;

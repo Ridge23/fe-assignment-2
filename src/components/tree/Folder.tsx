@@ -13,10 +13,20 @@ interface IFolder {
     onDelete: () => void;
     onFileCreate: () => void;
     onFolderCreate: () => void;
+    onRename: () => void;
 }
 
 export default function Folder(props: IFolder): JSX.Element {
-    const { id, name, childrenNodes, showDelete = true, onDelete, onFileCreate, onFolderCreate } = props;
+    const { 
+        id, 
+        name, 
+        childrenNodes, 
+        showDelete = true, 
+        onDelete, 
+        onFileCreate, 
+        onFolderCreate, 
+        onRename 
+    } = props;
     const [showFolder, setShowFolder] = useState(false);
     const noChildrenNodes = !childrenNodes || childrenNodes.length === 0
     const aClass = classNames([
@@ -37,7 +47,7 @@ export default function Folder(props: IFolder): JSX.Element {
                     onAddFileClick={onFileCreate}
                     onAddFolderClick={onFolderCreate}
                     onDeleteClick={onDelete}
-                    onRenameClick={() => {}}
+                    onRenameClick={onRename}
                 />
             </li>
             {childrenNodes && showFolder &&
