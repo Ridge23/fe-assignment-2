@@ -72,6 +72,10 @@ export default function FolderContainer({ id }: IFolderContainer) {
             if (!folderName) {
                 return;
             }
+            if (childrenFolders.find((folder) => folder.name === folderName)) {
+                alert('Folder already exists');
+                return;
+            }
             dispatch(renameFolder(id, folderName));
         }}
     />;
