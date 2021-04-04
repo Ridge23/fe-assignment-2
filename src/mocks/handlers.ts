@@ -60,4 +60,24 @@ export const handlers = [
             ctx.json({ success: true })
         );
     }),
+    rest.post('http://mock.local/tree/files', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ id: generateRandomId(), name: req.body.fileName })
+        )
+    }),
+    rest.post('http://mock.local/tree/folders', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({ id: generateRandomId(), name: req.body.folderName })
+        )
+    }),
 ];
+
+function generateRandomId() {
+    let min = 99999;
+    let max = 999999;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }

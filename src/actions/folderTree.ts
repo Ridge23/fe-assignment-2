@@ -95,7 +95,7 @@ export function deleteFolder(id) {
     }
 }
 
-export function addFileAction(id, fileName, folderId) {
+function addFileAction(id, fileName, folderId) {
     return {
         type: ADD_FILE,
         fileName,
@@ -104,12 +104,60 @@ export function addFileAction(id, fileName, folderId) {
     }
 }
 
-export function addFolderAction(id, folderName, folderId) {
+export function addFile(fileName, folderId) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(
+            `http://mock.local/tree/files`,
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fileName, folderId })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(addFileAction(data.id, data.name, folderId));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
+    }
+}
+
+function addFolderAction(id, folderName, folderId) {
     return {
         type: ADD_FOLDER,
         folderName,
         folderId,
         id
+    }
+}
+
+export function addFolder(folderName, folderId) {
+    return (dispatch: any): Promise<void> => {
+        dispatch(fetchFolderTreeStart());
+
+        return fetch(
+            `http://mock.local/tree/folders`,
+            {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folderName, folderId })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(addFolderAction(data.id, data.name, folderId));
+            })
+            .catch((error) => {
+                dispatch(fetchFolderTreeError());
+            });
     }
 }
 
