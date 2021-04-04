@@ -14,11 +14,11 @@ describe('File', () => {
 
         const contextMenuTrigger = component.find(ContextMenuTrigger);
         expect(contextMenuTrigger).toHaveLength(1);
-        expect(component.find(ContextMenuTrigger).props()).toHaveProperty('id', 'file_menu_10');
+        expect(contextMenuTrigger.props()).toHaveProperty('id', 'file_menu_10');
 
         const contextMenu = component.find(FileContextMenu);
         expect(contextMenu).toHaveLength(1);
-        expect(component.find(FileContextMenu).props()).toHaveProperty('id', 10);
+        expect(contextMenu.props()).toHaveProperty('id', 10);
         
         expect(component.find('li')).toHaveLength(1);
         expect(component.find('li')).toHaveProperty('key');

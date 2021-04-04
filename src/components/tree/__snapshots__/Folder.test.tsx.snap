@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Folder should render correctly without children 1`] = `
+<Fragment>
+  <li
+    className="folder__li"
+    key="folder-test"
+  >
+    <ContextMenuTrigger
+      attributes={Object {}}
+      collect={[Function]}
+      disable={false}
+      disableIfShiftIsPressed={false}
+      holdToDisplay={1000}
+      id="folder_menu_10"
+      mouseButton={2}
+      posX={0}
+      posY={0}
+      renderTag="div"
+    >
+      <a
+        className="folder__link--empty"
+        onClick={[Function]}
+      >
+        test
+      </a>
+    </ContextMenuTrigger>
+    <FolderContextMenu
+      id={10}
+      onAddFileClick={[Function]}
+      onAddFolderClick={[Function]}
+      onDeleteClick={[Function]}
+      onRenameClick={[Function]}
+      showDelete={true}
+    />
+  </li>
+</Fragment>
+`;
