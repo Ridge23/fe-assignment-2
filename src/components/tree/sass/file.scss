@@ -17,15 +17,8 @@
     vertical-align: middle;
   }
 
-  &__actions {
-    display: none;
-  }
-
   &__title {
     display: flex; 
     flex-direction: row;
-    &:hover > .file__actions {
-      display: block;
-    }
   }
 }
