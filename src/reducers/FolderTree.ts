@@ -1,4 +1,4 @@
-import { FILE_DELETE, FOLDER_DELETE, SELECT_FOLDER, ADD_FILE } from 'actions/folderTree';
+import { FILE_DELETE, FOLDER_DELETE, SELECT_FOLDER, ADD_FILE, ADD_FOLDER } from 'actions/folderTree';
 
 interface IFolder {
     id: number;
@@ -106,6 +106,22 @@ function FolderTree(state = initState, action) {
                     return folder;
                 }),
                 files: [...state.files, { id: action.id, name: action.fileName }]
+            }
+        }
+        case ADD_FOLDER: {
+            const folders = state.folders.map((folder) => {
+                if (folder.id === action.folderId) {
+                    let { childrenNodes } = folder;
+                    childrenNodes.push({ id: action.id, type: 'folder' });
+                    return { ...folder, childrenNodes };
+                }
+                return folder;
+            });
+            
+
+            return {
+                ...state,
+                folders: [...folders, { id: action.id, name: action.folderName, childrenNodes: [] }]
             }
         }
         default: {
