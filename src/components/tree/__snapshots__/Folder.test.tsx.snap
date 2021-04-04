@@ -19,7 +19,19 @@ exports[`Folder should render correctly with children 1`] = `
   onFolderCreate={[Function]}
   onRename={[Function]}
   showFolder={true}
-  toggleShowFolder={[Function]}
+  toggleShowFolder={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
   <li
     className="folder__li folder__li--active"

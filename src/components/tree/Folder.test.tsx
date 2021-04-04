@@ -32,6 +32,8 @@ describe('Folder', () => {
     });
 
     it('should render correctly with children', () => {
+        const mockToggleShowFolder = jest.fn();
+
         const component = mount(<Folder
             id={10}
             name='test'
@@ -39,7 +41,7 @@ describe('Folder', () => {
             onRename={noop}
             onFileCreate={noop}
             onFolderCreate={noop}
-            toggleShowFolder={noop}
+            toggleShowFolder={mockToggleShowFolder}
             showFolder
             childrenNodes={[<File
                 key={'file-test1'}
@@ -56,6 +58,9 @@ describe('Folder', () => {
 
         const a = component.find('a');
         expect(a).toHaveLength(1);
+
+        a.simulate('click');
+        expect(mockToggleShowFolder.mock.calls.length).toEqual(1);
         expect(component).toMatchSnapshot();
     });
 })
