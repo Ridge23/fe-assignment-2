@@ -4,12 +4,10 @@ exports[`Folder should render correctly with children 1`] = `
 <Folder
   childrenNodes={
     Array [
-      <Folder
+      <Unknown
         id={1}
-        name="test"
+        name="test1"
         onDelete={[Function]}
-        onFileCreate={[Function]}
-        onFolderCreate={[Function]}
         onRename={[Function]}
       />,
     ]
@@ -20,9 +18,11 @@ exports[`Folder should render correctly with children 1`] = `
   onFileCreate={[Function]}
   onFolderCreate={[Function]}
   onRename={[Function]}
+  showFolder={true}
+  toggleShowFolder={[Function]}
 >
   <li
-    className="folder__li"
+    className="folder__li folder__li--active"
     key="folder-test"
   >
     <ContextMenuTrigger
@@ -227,6 +227,20 @@ exports[`Folder should render correctly with children 1`] = `
       </ContextMenu>
     </FolderContextMenu>
   </li>
+  <ul
+    className="folder"
+    key="folder-children-test"
+  >
+    <Component
+      id={1}
+      key="file-test1"
+      name="test1"
+      onDelete={[Function]}
+      onRename={[Function]}
+    >
+      File
+    </Component>
+  </ul>
 </Folder>
 `;
 

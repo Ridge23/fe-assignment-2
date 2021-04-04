@@ -3,8 +3,11 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Folder from './Folder';
+import File from './File';
 
 const noop = () => { };
+
+jest.mock('./File', () => () => 'File');
 
 describe('Folder', () => {
     it('should render correctly without children', () => {
@@ -37,25 +40,22 @@ describe('Folder', () => {
             onFileCreate={noop}
             onFolderCreate={noop}
             toggleShowFolder={noop}
-            childrenNodes={[<Folder
+            showFolder
+            childrenNodes={[<File
+                key={'file-test1'}
                 id={1}
-                name="test"
+                name="test1"
                 onDelete={noop}
                 onRename={noop}
-                onFolderCreate={noop}
-                onFileCreate={noop}
-                toggleShowFolder={noop}
             />
             ]}
         />);
         const li = component.find('li');
 
         expect(li).toHaveLength(1);
-        expect(li.props()).toHaveProperty('className', 'folder__li');
 
         const a = component.find('a');
         expect(a).toHaveLength(1);
-        expect(a.props()).toHaveProperty('className', 'folder__link--active');
         expect(component).toMatchSnapshot();
     });
 })
