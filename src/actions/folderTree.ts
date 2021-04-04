@@ -3,6 +3,7 @@ export const FILE_DELETE = 'FILE_DELETE';
 export const FOLDER_DELETE = 'FOLDER_DELETE';
 export const ADD_FILE = 'ADD_FILE';
 export const ADD_FOLDER = 'ADD_FOLDER';
+export const RENAME = 'RENAME';
 
 export function deleteFileAction(id) {
     return {
@@ -33,5 +34,14 @@ export function addFolderAction(id, folderName, folderId) {
         folderName,
         folderId,
         id
+    }
+}
+
+export function renameAction(id, type, name) {
+    return {
+        type: RENAME,
+        entityType: type,
+        id,
+        name
     }
 }

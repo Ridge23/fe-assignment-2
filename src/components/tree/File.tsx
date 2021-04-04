@@ -9,13 +9,14 @@ interface IFile {
     id: number;
     name: string;
     onDelete: () => void;
+    onRename: () => void;
 }
 
-export default function File({ id, name, onDelete }: IFile): JSX.Element {
+export default function File({ id, name, onDelete, onRename }: IFile): JSX.Element {
     return <li key={`file-${name}`} className="file" >
         <ContextMenuTrigger id={`file_menu_${id}`}>
             <div className="file__title">{name}</div>
         </ContextMenuTrigger>
-        <FileContextMenu id={id} onDeleteClick={onDelete} onRenameClick={() => {}} />
+        <FileContextMenu id={id} onDeleteClick={onDelete} onRenameClick={onRename} />
     </li>;
 }

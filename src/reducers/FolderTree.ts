@@ -1,4 +1,11 @@
-import { FILE_DELETE, FOLDER_DELETE, SELECT_FOLDER, ADD_FILE, ADD_FOLDER } from 'actions/folderTree';
+import { 
+    FILE_DELETE, 
+    FOLDER_DELETE, 
+    SELECT_FOLDER, 
+    ADD_FILE, 
+    ADD_FOLDER, 
+    RENAME 
+} from 'actions/folderTree';
 
 interface IFolder {
     id: number;
@@ -123,6 +130,24 @@ function FolderTree(state = initState, action) {
                 ...state,
                 folders: [...folders, { id: action.id, name: action.folderName, childrenNodes: [] }]
             }
+        }
+        case RENAME: {
+            if (action.entityType === 'file') {
+                return {
+                    ...state,
+                    files: state.files.map((file: IFile): IFile => {
+                        if (file.id === action.id) {
+                            return {
+                                ...file,
+                                name: action.name
+                            }
+                        }
+                        return file;
+                    })
+                }
+            }
+
+            return state;
         }
         default: {
             return state;
