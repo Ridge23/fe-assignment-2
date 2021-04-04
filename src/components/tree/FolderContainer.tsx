@@ -40,11 +40,17 @@ export default function FolderContainer({ id }) {
         }}
         onFolderCreate={() => {
             const folderName = prompt('Provide name of the folder');
+            if (!folderName) {
+                return;
+            }
             const folderId = generateRandomId();
             dispatch(addFolderAction(folderId, folderName, id));
         }}
         onRename={() => {
             const folderName = prompt('New folder name', folder.name);
+            if (!folderName) {
+                return;
+            }
             dispatch(renameAction(id, 'folder', folderName));
         }}
     />;

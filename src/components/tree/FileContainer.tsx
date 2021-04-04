@@ -17,6 +17,9 @@ export default function FileContainer({ id }): JSX.Element {
         onDelete={() => dispatch(deleteFileAction(id))} 
         onRename={() => {
             const fileName = prompt('New file name', file.name);
+            if (!fileName) {
+                return;
+            }
             dispatch(renameAction(id, 'file', fileName));
         }}
       /> 
