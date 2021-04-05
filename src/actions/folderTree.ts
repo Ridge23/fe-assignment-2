@@ -1,3 +1,4 @@
+import { RootDispatch } from 'store';
 import { IFile, IFolder } from 'reducers/FolderTree';
 
 export const SELECT_FOLDER = 'SELECT_FOLDER';
@@ -37,7 +38,7 @@ interface IFolderTreeResponseData {
 }
 
 export function fetchFolderTree() {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch('http://mock.local/tree')
@@ -47,6 +48,7 @@ export function fetchFolderTree() {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
@@ -59,7 +61,7 @@ function deleteFileAction(id) {
 }
 
 export function deleteFile(id) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(`http://mock.local/tree/files/${id}`, { method: 'DELETE' })
@@ -69,6 +71,7 @@ export function deleteFile(id) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
@@ -81,7 +84,7 @@ function deleteFolderAction(id) {
 }
 
 export function deleteFolder(id) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(`http://mock.local/tree/folders/${id}`, { method: 'DELETE' })
@@ -91,6 +94,7 @@ export function deleteFolder(id) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
@@ -105,7 +109,7 @@ function addFileAction(id, fileName, folderId) {
 }
 
 export function addFile(fileName, folderId) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(
@@ -124,6 +128,7 @@ export function addFile(fileName, folderId) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
@@ -138,7 +143,7 @@ function addFolderAction(id, folderName, folderId) {
 }
 
 export function addFolder(folderName, folderId) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(
@@ -157,6 +162,7 @@ export function addFolder(folderName, folderId) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
@@ -171,7 +177,7 @@ function renameAction(id, type, name) {
 }
 
 export function renameFile(id, name) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(`http://mock.local/tree/files/${id}`, { method: 'PATCH' })
@@ -181,12 +187,13 @@ export function renameFile(id, name) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
 
 export function renameFolder(id, name) {
-    return (dispatch: any): Promise<void> => {
+    return (dispatch: RootDispatch): Promise<void> => {
         dispatch(fetchFolderTreeStart());
 
         return fetch(`http://mock.local/tree/folders/${id}`, { method: 'PATCH' })
@@ -196,6 +203,7 @@ export function renameFolder(id, name) {
             })
             .catch((error) => {
                 dispatch(fetchFolderTreeError());
+                throw error;
             });
     }
 }
